@@ -1,0 +1,35 @@
+{
+  "name": "login_register",
+  "version": "1.0.0",
+  "description": "login and register app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alminaildirar/LoginAndRegister.git"
+  },
+  "keywords": [
+    "login",
+    "register",
+    "users"
+  ],
+  "author": "Almina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alminaildirar/LoginAndRegister/issues"
+  },
+  "homepage": "https://github.com/alminaildirar/LoginAndRegister#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
