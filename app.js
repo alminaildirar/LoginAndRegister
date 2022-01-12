@@ -2,7 +2,9 @@ const express = require('express');
 const session = require('express-session')
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
-const userController = require('./controllers/userController')
+const pageRoute = require('./routes/pageRoute')
+const userRoute = require('./routes/userRoute')
+
 
 const app = express();
 global.userIN = null;
@@ -34,10 +36,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //Routes
-app.get('/' , (req,res) => res.status(200).render('login'))
-app.get('/register' , (req,res) => res.status(200).render('register'))
-app.get('/users' , (req,res) => res.status(200).render('users'))
-app.post('/register', userController.createUser)
+app.use('/' , pageRoute)
+app.use('/users' , userRoute)
+
 
 const port = process.env.PORT || 3000; 
 app.listen(port, () => {

@@ -1,0 +1,43 @@
+.container {
+    margin-top: 70px;
+    padding: 20px;
+}
+.title {
+    text-align: center;
+    font-size: 48px;
+}
+.girl-bro {
+    max-width: 600px;
+    margin: auto;
+}
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.btn {
+    padding: 10px 30px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: #5CA4A9;
+    transition: all .25s ease-in-out;
+    border: 1px solid #5CA4A9;
+}
+.btn:hover {
+    color: #5CA4A9;
+    background-color: #fff;
+}
+/* .login {
+    background-color: #E3879E;
+}
+.register {
+    background-color: plum;
+} */
+.btn-group ~ span {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
