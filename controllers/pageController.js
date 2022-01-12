@@ -3,6 +3,7 @@ const res = require("express/lib/response");
 //http://localhost:3000/...
 
 exports.getIndexPage = (req, res) => {
+    console.log(req.session)
     res.status(200).render('index')
 }
 
