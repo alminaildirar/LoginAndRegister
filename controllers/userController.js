@@ -47,6 +47,18 @@ exports.loginUser =  async(req, res) => {
 }
 
 
-exports.getDashboardPage = (req, res) => {
-    res.status(200).render('dashboard')
+exports.logoutUser = (req, res) => {
+    req.session.destroy(()=>{
+        res.redirect('/')
+    })
+}
+
+exports.getDashboardPage = async (req, res) => {
+    const user = await User.findOne({ _id: req.session.userID})
+    const users = await User.find()
+    console.log(users)
+    res.status(200).render('dashboard', {
+        user,
+        users
+    })
 }
