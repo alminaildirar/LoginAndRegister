@@ -1,14 +1,17 @@
 const express = require('express');
 const session = require('express-session')
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
 const MongoStore = require('connect-mongo');
 const pageRoute = require('./routes/pageRoute')
 const userRoute = require('./routes/userRoute')
 
-
+dotenv.config();
+//Init Express App
 const app = express();
 
-
+//Set port number
+const port = process.env.PORT || 3000; 
 
 //Template Engine
 app.set('view engine', 'ejs');
@@ -47,7 +50,7 @@ app.use('/' , pageRoute)
 app.use('/users' , userRoute)
 
 
-const port = process.env.PORT || 3000; 
+
 app.listen(port, () => {
   console.log(`Server is running on ${port}.`);
 });
