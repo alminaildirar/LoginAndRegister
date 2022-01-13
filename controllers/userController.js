@@ -1,6 +1,8 @@
 const User  = require('../models/User');
 const res = require("express/lib/response");
+const session = require('express-session')
 const bcrypt = require('bcrypt');
+
 
 
 exports.createUser = async (req, res) => {
@@ -18,17 +20,20 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser =  async(req, res) => {
     try {
-       const userName = req.body.userName
-       const password = req.body.password
-        
+       //Get userName and password from register form
+       const {userName, password} = req.body
+       
+       //Check is there a user with this userName
        const user = await User.findOne({userName})
        
- 
+            //İf user is exist in db then check password and redirect to homepage
             if(user) {
                 
                 bcrypt.compare(password, user.password, (err, same) => {
-                //req.session.userID = user._id
-                res.status(200).redirect('/')
+                req.session.userID = user._id
+                req.session.userAgent = req.get('user-agent')
+                console.log(req.session)
+                res.status(200).redirect('/users/dashboard')
                 })
             }
        
@@ -39,4 +44,9 @@ exports.loginUser =  async(req, res) => {
        error
        }); 
    }
+}
+
+
+exports.getDashboardPage = (req, res) => {
+    res.status(200).render('dashboard')
 }

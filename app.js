@@ -7,7 +7,8 @@ const userRoute = require('./routes/userRoute')
 
 
 const app = express();
-global.userIN = null;
+
+
 
 //Template Engine
 app.set('view engine', 'ejs');
@@ -18,10 +19,16 @@ mongoose.connect('mongodb://localhost/loginregister-db')
 
 //Middlewares
 app.use(express.static('public'));
+
 app.use(session({
-  secret: 'my_keyboad_cat',
+  //Secret: is a key that will sign a cookie.This key will sign our cookie that is saved to the browser.
+  secret: 'auth_secret ',
+  //Resave: this is basically just means for every request to the serverwe want to create a new session even
+  //if we dont care about if its same user or browser we dont want this so we set FALSE
   resave: false,
-  saveUninitialized: true,
+  //saveUnitialized: basically means if we have not touched or modified the session, we dont want it to save.
+  //DİKKAT BU TRUE İDİ SMARTTA BEN FALSE YAPTIM!!!!
+  saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: 'mongodb://localhost/loginregister-db' })
 }))
 app.use('*', (req, res, next)=>{
