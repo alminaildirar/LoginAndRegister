@@ -36,7 +36,7 @@ exports.createUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     try {
         errors = []
-
+        
         if(!req.body.userName || !req.body.password){
             errors.push('Invalid')
             res.render('login' , { 
@@ -74,6 +74,7 @@ exports.loginUser = async (req, res) => {
                     maxAge: 7200000 // 2hours
                 })
                 
+                //send session and token to verify function for comparing
                 if (verify(req.session, token)) {
                     res.status(200).redirect('/users/dashboard')
                 }
