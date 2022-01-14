@@ -6,62 +6,56 @@
 Include Tailwind JIT CDN compiler
 More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
 -->
-
- 
-
 <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
-
-
-
 <!-- Snippet -->
 <section class="flex flex-col justify-center antialiased bg-gray-100 text-gray-600 min-h-screen p-4">
-    <div class="btn-group">
+    <div class="btn-group list-btn">
         <a href="/users/logout" class="btn register">Log Out</a>
-        <a href="/" class="btn register">Home Page</a>
+        <a href="/" class="btn register"><i class="zmdi zmdi-home"></i> Home Page</a>
       </div>
     <div class="h-full">
         <!-- Table -->
-        <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+        <div class="w-full max-w-3xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="px-5 py-4 border-b border-gray-100">
-                <h2 class="font-semibold text-gray-800">User List</h2>
+                <h2 class="font-semibold text-center text-gray-800">User List</h2>
             </header>
             <div class="p-3">
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full">
-                        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                        <thead class="text-base font-semibold uppercase text-gray-400 bg-gray-50">
                             <tr>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">User Name</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">First Name</div>
+                                    <div class="font-semibold text-center">First Name</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Last Name </div>
+                                    <div class="font-semibold text-center">Last Name </div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">E-mail</div>
+                                    <div class="font-semibold text-center">E-mail</div>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm divide-y divide-gray-100">
+                        <tbody class="text-base divide-y divide-gray-100">
                             
                         <% for(let i=0; i<users.length; i++) { %>
                             <tr>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
+                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://cdn-icons-png.flaticon.com/512/763/763724.png" width="40" height="40" alt="cutecat"></div>
                                         <div class="font-medium text-gray-800"><%= users[i].userName %></div>
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left"><%= users[i].firstName %></div>
+                                    <div class=" text-center"><%= users[i].firstName %></div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left"><%= users[i].lastName %></div>
+                                    <div class="text-center"><%= users[i].lastName %></div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-500"><%= users[i].email %></div>
+                                    <div class="text-center font-medium text-green-500"><%= users[i].email %></div>
                                 </td>
 
                             </tr>

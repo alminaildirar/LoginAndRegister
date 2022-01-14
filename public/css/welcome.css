@@ -1,5 +1,6 @@
 .container {
-    margin-top: 70px;
+    position: relative;
+    margin-top: 25px;
     padding: 20px;
 }
 .title {
@@ -25,19 +26,34 @@
     background-color: #5CA4A9;
     transition: all .25s ease-in-out;
     border: 1px solid #5CA4A9;
+    margin: 5px;
 }
 .btn:hover {
     color: #5CA4A9;
     background-color: #fff;
 }
-/* .login {
-    background-color: #E3879E;
-}
-.register {
-    background-color: plum;
-} */
 .btn-group ~ span {
     display: block;
     text-align: center;
     font-size: 14px;
+}
+.list-btn {
+    justify-content: center;
+}
+.err-block {
+    max-width: 500px;
+    margin: 5px auto;
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.err-msg {
+    font-size: 16px;
+    font-weight: 700;
+    color: red;
 }

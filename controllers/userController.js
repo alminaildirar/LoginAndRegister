@@ -1,12 +1,14 @@
 const User = require('../models/User');
 const res = require("express/lib/response");
 const session = require('express-session');
+const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+const req = require('express/lib/request');
 
 
 //Function that compares information from session and jwt
-const verify = (session, token) => {
+const verify = async(session, token) => {
 
     //userID info which i received from express-session
     const sessionID = String(session.userID)
@@ -17,7 +19,6 @@ const verify = (session, token) => {
     //userAgent info which i received from jwt
     const tokenUserAgent = jwt.decode(token).userAgent
 
-
     //Check if the userID and userAgent information in both session and jwt MATCH?? then return true
     if ((sessionID === tokenID) && (sessionUserAgent === tokenUserAgent)) {
         return true;
@@ -26,17 +27,54 @@ const verify = (session, token) => {
     }
 }
 
+let errors = []
+//This function checks values which i get from body.
+const checkforRegister = async(reqbody) => {
+    
+    if(await User.findOne({userName: reqbody.userName})){
+        errors.push('Username already exist')
+    }
+    if(await User.findOne({email: reqbody.email})){
+        errors.push('email already exist')
+    }
+    if(reqbody.password !== reqbody.password2){
+        errors.push('Passwords do not match.')
+    }
+    if(!reqbody.firstName || !reqbody.lastName || !reqbody.password || !reqbody.password2 || !reqbody.email){
+        errors.push('Please fill in all fields.')
+    }
+}
+
+const checkForLogin = async(reqbody) => {
+    if(!await User.findOne({userName: reqbody.userName})){
+        errors.push('Username already exist')
+    }
+}
 
 
 exports.createUser = async (req, res) => {
     try {
-        const user = await User.create(req.body);
-        res.status(201).redirect('/login')
+        errors = []
+        //Before create user, wait for checking process
+        await checkforRegister(req.body)
+        
+        //If there is no error, then create :)
+        if(errors.length === 0){
+            const user = await User.create(req.body);
+            res.status(201).redirect('/login')
+        }else{  //If there is a error go back to register page 
+                res.status(200).render('register', {
+                    errors
+                    
+                })
+        }
+        
     } catch (error) {
         res.status(400).json({
             status: 'fail',
             error
         });
+
     }
 }
 
@@ -54,24 +92,24 @@ exports.loginUser = async (req, res) => {
             bcrypt.compare(password, user.password, (err, same) => {
                 req.session.userID = user._id
                 req.session.userAgent = req.get('user-agent')
-                
+
                 //create and assign a token with userID and userAgent information
                 const token = jwt.sign(
-                {
-                    _id: user._id,
-                    userAgent: req.headers['user-agent']
-                }, 
-                process.env.TOKEN_SECRET, 
-                {
-                    expiresIn: '1h'
-                })
-                
+                    {
+                        _id: user._id,
+                        userAgent: req.headers['user-agent']
+                    },
+                    process.env.TOKEN_SECRET,
+                    {
+                        expiresIn: '1h'
+                    })
+
                 //Sets a cookie
                 res.cookie('jwt', token, {
-                    httpOnly:true,
+                    httpOnly: true,
                     maxAge: 7200000 // 2hours
                 })
-
+                
                 if (verify(req.session, token)) {
                     res.status(200).redirect('/users/dashboard')
                 }

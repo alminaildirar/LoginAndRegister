@@ -26,5 +26,8 @@ exports.getLoginPage = (req, res) => {
 }
 
 exports.getRegisterPage = (req, res) => {
-    res.status(200).render('register')
+    const errors = []
+    res.status(200).render('register', {
+        errors
+    })
 }

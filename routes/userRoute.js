@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const userController = require('../controllers/userController');
 const checkMiddleware = require('../middlewares/checkMiddleware');
+const { check, validationResult } = require('express-validator')
 
 
 //http://localhost:3000/users/....
