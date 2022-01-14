@@ -22,7 +22,10 @@ exports.getIndexPage = async (req, res) => {
 }
 
 exports.getLoginPage = (req, res) => {
-    res.status(200).render('login')
+    const errors = []
+    res.status(200).render('login', {
+        errors
+    })
 }
 
 exports.getRegisterPage = (req, res) => {
