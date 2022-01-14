@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 //------------Connect to db---------------------------
-mongoose.connect('mongodb://localhost/loginregister-db')
+mongoose.connect('mongodb+srv://almina:zxc123zxc@cluster0.dlkw6.mongodb.net/auth-db?retryWrites=true&w=majority')
          .then(()=> console.log('db connected successfuly'))
 
 //--------Middlewares-----------
@@ -34,7 +34,7 @@ app.use(session({
   resave: false,
   //saveUnitialized: basically means if we have not touched or modified the session, we dont want it to save.
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/loginregister-db' })
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://almina:zxc123zxc@cluster0.dlkw6.mongodb.net/auth-db?retryWrites=true&w=majority' })
 }))
 
 
