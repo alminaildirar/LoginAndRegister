@@ -4,7 +4,7 @@ In this project, there are login, register, home and dashboard pages. The user i
 
 ---
 
-## 🌏 Check out [ demo](https://link-url-here.org)
+## 🌏 Check out [ demo](https://auth-week2.herokuapp.com/)
 ---
 ## 🔎 Technologies
 
